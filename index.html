@@ -1,0 +1,34 @@
+<html>
+    <head>
+        <!-- <script src="modernizr-custom.js"></script> -->
+        <script src="index.js"></script>
+    </head>
+    <style>
+        div { border:2px solid black;padding:5px;margin:20px;}
+        li span { display:none}
+        #header { font-size:50px;color:red}
+    </style>
+    <body>
+        <div id="header">Todo Application</div>
+        <div id="listtodos">
+            <h2>Vandaag nog te doen</h2>
+            <ul id="todolistul" onclick="selectTodo()">
+             
+            </ul>
+        </div>
+        
+        <div id="tododetail">
+            <h1 id="todoTitle"></h1>
+            <p id="todoDescription"></p>
+            <input id="btnDone" style="display:none" type="button" value="Gedaan" onclick="removeTodo()" />
+            
+        </div>
+
+        <div id="todoform">
+            Titel <input type="text" name="title" id="title" />
+            Omschrijving <input type="text" name="omschrijving" id="omschrijving"/>
+            <input type="submit" value="sla op" onclick="saveTodo()" />
+        </div>
+
+    </body>
+</html>
