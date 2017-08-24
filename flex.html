@@ -1,0 +1,33 @@
+<html>
+    <head></head>
+    <style>
+    .blok { background-color:coral;min-width:50px;margin:15px;}
+    .blok.blue { background-color:blue;}
+    body { background-color:red;}
+    #mobileheader { display:none }
+        #desktopheader { display:block }
+
+    @media screen and (max-width:600px) {
+        body { background-color:green;}
+        #mobileheader { display:block }
+        #desktopheader { display:none }
+    }
+    </style>
+    <body>
+        <header id="desktopheader">Desktop</header>
+        <header id="mobileheader">Mobile</header>
+        <div style="display:flex;flex-flow:wrap;
+            align-items:stretch;
+            justify-content:center;flex-direction:row;border:2px solid black;">
+            <div class="blok" style="flex:1">qwewqe</div>
+            <div class="blok blue"  style="flex:3">qwewqe<br>werwer
+                qwewqe<br>werwer
+                qwewqe<br>werwer
+                qwewqe<br>werwer
+                qwewqe<br>werwer
+                qwewqe<br>werwer
+            </div>
+            <div class="blok"  style="flex:1">qwewqe</div>
+        </div>
+    </body>
+</html>

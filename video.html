@@ -1,0 +1,36 @@
+<html>
+    <head></head>
+    <style>
+       
+        .blokje { 
+            position:relative; left:0px;top:0px;
+            width:50px;height:50px;background-color:coral}
+    </style>
+    <body>
+    
+        <div class="blokje" onclick="addClass(this)"></div>
+
+        <script>
+        function addClass(e){
+            var keyframes = [
+                { backgroundColor:'red', transform:'translateX(0px)' },
+                { backgroundColor:'green', transform:'translateX(100px)' }
+            ];
+            var timing = {
+                duration: 1500,
+                iterations: 1,
+            }
+
+            setInterval(()=>{
+                console.log('e position', e.getBoundingClientRect().left)
+            }, 50);
+
+            var player = e.animate(keyframes, timing); 
+            player.onfinish = function() {
+                 e.style.left = e.getBoundingClientRect().left + 'px';
+            }
+        }
+        </script>
+    </body>    
+
+</html>

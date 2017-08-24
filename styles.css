@@ -1,0 +1,43 @@
+@font-face {
+    font-family: 'Indie Flower';
+    src: url(https://fonts.gstatic.com/s/indieflower/v8/10JVD_humAd5zP2yrFqw6ugdm0LZdjqr5-oayXSOefg.woff2);
+}
+* { 
+    font-family: 'Indie Flower'
+}
+body {
+    overflow-y:hidden;
+    background:linear-gradient(white, silver);
+}
+li span { 
+    display:none;
+}
+header { 
+    text-align:center;
+    font-size:35px;
+    color:red; 
+    text-shadow:5px 5px silver;
+}
+.error { 
+    color:red;
+}
+.container {
+    display:flex;
+    flex-flow:wrap;
+}
+.container div { 
+    min-height:150px; min-width:250px;flex:1;
+    border:2px solid#636363;padding:15px;margin:20px;
+    border-radius:15px;
+}
+.hidden { 
+    display:none;
+}
+
+#mobile { display:none }
+#desktop { display:block }
+
+@media screen and (max-width:600px) {
+    #mobile { display:block }
+    #desktop { display:none }    
+}

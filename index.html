@@ -1,34 +1,43 @@
 <html>
     <head>
         <!-- <script src="modernizr-custom.js"></script> -->
-        <script src="index.js"></script>
+        <!-- http://www.html-5-tutorial.com/all-html-tags.htm -->
+        <script src="./index.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="./styles.css" />
     </head>
     <style>
-        div { border:2px solid black;padding:5px;margin:20px;}
-        li span { display:none}
-        #header { font-size:50px;color:red}
     </style>
     <body>
-        <div id="header">Todo Application</div>
-        <div id="listtodos">
-            <h2>Vandaag nog te doen</h2>
-            <ul id="todolistul" onclick="selectTodo()">
-             
-            </ul>
-        </div>
-        
-        <div id="tododetail">
-            <h1 id="todoTitle"></h1>
-            <p id="todoDescription"></p>
-            <input id="btnDone" style="display:none" type="button" value="Gedaan" onclick="removeTodo()" />
-            
+        <header>Todo Application<span id="mobile">Mobile(c)</span><span id="desktop">Desktop(c)</span></header>
+       
+        <div class="container">
+            <div id="listtodos">
+                <h2>Vandaag nog te doen</h2>
+                <ul id="todolistul" onclick="selectTodo()">
+                </ul>
+                <span id="noitems">-niets om te doen-</span>
+            </div>
+                
+            <div id="tododetail" hidden>
+                <h1 id="todoTitle"></h1>
+                <p id="todoDescription"></p>
+                <input id="btnDone" style="display:none" type="button" value="Gedaan" onclick="removeTodo()" />
+                
+            </div>
+    
+            <div id="todoform">
+                <h2>Voeg iets om te doen toe</h2>
+                Titel <input type="text" class="form-control" placeholder="title" name="title" id="title" required /><br />
+                Omschrijving <input type="text" class="form-control" placeholder="omschrijving" name="omschrijving" id="omschrijving" required /> <br/>
+                <input type="submit" class="btn btn-primary" value="sla op" onclick="saveTodo()" />
+                <span id="error" class="error"></span>
+            </div>
         </div>
 
-        <div id="todoform">
-            Titel <input type="text" name="title" id="title" />
-            Omschrijving <input type="text" name="omschrijving" id="omschrijving"/>
-            <input type="submit" value="sla op" onclick="saveTodo()" />
-        </div>
+        <footer>
+            All rights reserved (c) John Gorter
+        </footer>
 
     </body>
 </html>
