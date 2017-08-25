@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+    <head></head>
+    <body>
+        
+        <span id="nameSpan"></span>
+        Name: <input type="text" value="" name="name" id="name" />
+        <input type="submit" value="sla op" onclick="saveName()"/>
+
+
+        <script>
+
+        var names = [];
+        if (window.localStorage["usernames"]){
+            names = JSON.parse(window.localStorage["usernames"]);
+            showNames();
+        }
+
+        function saveName(){
+            var name= document.querySelector("#name").value;
+            names.push(name); 
+            window.localStorage["usernames"] = JSON.stringify(names);
+            showNames();
+        }
+
+        function showNames(){
+            document.querySelector("#nameSpan").innerHTML = "";
+            for (var n of names){
+                document.querySelector("#nameSpan").innerHTML += n + ',' ;
+            }
+        }
+        </script>
+    </body>
+</html>

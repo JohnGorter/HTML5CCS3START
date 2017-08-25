@@ -1,0 +1,119 @@
+<html>
+    <head>
+        <!-- <script src="modernizr-custom.js"></script> -->
+        <!-- http://www.html-5-tutorial.com/all-html-tags.htm -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="./styles.css" />
+        <link rel="manifest" href="manifest.json" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <style>
+    </style>
+    <body>
+        <a href="./beheer.html">Klik hier om de app te beheren</a>
+        <header>Todo John<span id="mobile">Mobile(c)</span><span id="desktop">Desktop(c)</span></header>
+       
+        <div class="container">
+            <div id="listtodos">
+                <h2>Vandaag nog te doen</h2>
+                <ul id="todolistul" onclick="selectTodo()">
+                </ul>
+                <span id="noitems">-niets om te doen-</span>
+            </div>
+                
+            <div id="tododetail" hidden>
+                <h1 id="todoTitle"></h1>
+                <p id="todoDescription"></p>
+                <input id="btnDone" style="display:none" type="button" value="Gedaan" onclick="removeTodo()" />
+                
+            </div>
+    
+            <div id="todoform">
+                <h2>Voeg iets om te doen toe</h2>
+                Titel <input type="text" class="form-control" placeholder="title" name="title" id="title" required /><br />
+                Omschrijving <input type="text" class="form-control" placeholder="omschrijving" name="omschrijving" id="omschrijving" required /> <br/>
+                <input type="submit" class="btn btn-primary" value="sla op" onclick="saveTodo()" />
+                <span id="error" class="error"></span>
+            </div>
+        </div>
+
+        <div id="map" style="height:50vh;width:50vw"></div>
+
+        <footer style="text-align: center">
+            All rights reserved (c) John Gorter
+        </footer>
+
+        <script>
+        var worker = new Worker('./background-worker.js');
+
+        </script>
+
+        <script src="./index.js"></script>
+        <!-- <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCkLaPn2sglBxoJvltMkLulqKDahFCSvVI&callback=initMap">
+        </script> -->
+        <script>
+            document.body.style.backgroundColor = navigator.onLine ? 'green':'red';
+            addEventListener('offline', () => {
+                document.body.style.backgroundColor = 'red';
+            });
+            addEventListener('online', () => {
+                document.body.style.backgroundColor = 'green';
+            });
+
+            function testSend(){
+                conn.send('tadaaaa');
+            }
+
+             conn = new WebSocket('ws://localhost:8080');
+             conn.onopen = () => {
+                    console.log('connection opened');
+             };
+
+             conn.onclose = () => {
+                    console.log('connection closed');
+             };
+
+            conn.onmessage = (event) => {
+                console.log(event.data);
+            }
+         </script>
+         <script>
+                function initMap() {
+                    window.navigator.geolocation.getCurrentPosition((a) => {
+                        var lat = a.coords.latitude;
+                        var long = a.coords.longitude;
+
+                        var myplace = {lat: lat, lng: long};
+                        var map = new google.maps.Map(document.getElementById('map'), {
+                            zoom: 15,
+                            center: myplace
+                         });
+                        var marker = new google.maps.Marker({
+                            position: myplace,
+                            map: map
+                        });
+                    });
+                }
+              </script>
+
+        <script>
+
+            window.navigator.geolocation.getCurrentPosition((a) => {
+                var lat = a.coords.latitude;
+                var long = a.coords.longitude;
+                var url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${long}&key=AIzaSyCkLaPn2sglBxoJvltMkLulqKDahFCSvVI`;
+
+                fetch(url).then((res) => { 
+                    res.json().then((b)=>{ 
+                        document.querySelector("footer").innerHTML += ` at ${b.results[0].formatted_address}`;
+                    });
+                });
+
+
+            });
+            navigator.serviceWorker.register("./sw.js");
+          
+        </script>
+    </body>
+</html>

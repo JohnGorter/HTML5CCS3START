@@ -1,17 +1,20 @@
 
 var selectedTodo = null;
 
+var todos = [];
+if (window.localStorage["todos"]){
+    todos = JSON.parse(window.localStorage["todos"]);
+    for (var t of todos)
+        addTodo(t.title, t.omschrijving, false);
+}
+
 function saveTodo(){
     var titleinput = document.getElementById("title");
     var omschrijvinginput = document.getElementById("omschrijving")
     if (titleinput.validity.valid && omschrijvinginput.validity.valid) {
         var title = titleinput.value;
         var omschrijving = omschrijvinginput.value;
-        var todolistul = document.getElementById("todolistul");
-        var li = document.createElement("li");
-        li.innerHTML = '' + title + ' <span>' + omschrijving + ' </span>';
-        todolistul.appendChild(li);
-        document.querySelector("#noitems").hidden =!(todolistul.childElementCount == 0);
+        addTodo(title, omschrijving, true);
         document.getElementById("error").innerHTML = '';
         titleinput.value = '';
         omschrijvinginput.value = '';
@@ -20,9 +23,34 @@ function saveTodo(){
     }
 }
 
+function addTodo(title, omschrijving, push){
+    var todolistul = document.getElementById("todolistul");
+    var li = document.createElement("li");
+    li.innerHTML = '' + title + ' <span>' + omschrijving + ' </span>';
+    todolistul.appendChild(li);
+    if (push) {
+        todos.push({title:title, omschrijving:omschrijving});
+        window.localStorage["todos"] = JSON.stringify(todos);
+    }
+    document.querySelector("#noitems").hidden =!(todolistul.childElementCount == 0);
+}
+
 function removeTodo(){
     if (selectedTodo){
         var todolistul = document.getElementById("todolistul");
+
+        var title = selectedTodo.innerText;
+        var todoToDelete = null;
+        for (var t of todos){
+            if (t.title == title) {
+                 todoToDelete = t; break;
+            }
+        }
+        if (todoToDelete){
+            todos.splice(todos.indexOf(todoToDelete),1);
+            window.localStorage["todos"] = JSON.stringify(todos);
+        }
+        
         todolistul.removeChild(selectedTodo);
         document.querySelector("#noitems").hidden = !(todolistul.childElementCount == 0);
         selectedTodo = null;
